@@ -1,168 +1,352 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Valentine 💘</title>
+<meta charset="UTF-8" />
+<title>Valentine 💘</title>
+<style>
+body {
+  height: 100vh;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  background: #ffd6e5;
+  overflow: hidden;
+}
 
-  <style>
-    body {
-      height: 100vh;
-      margin: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: "Helvetica Neue", Arial, sans-serif;
-      background: #ffd6e5;
-    }
+.card {
+  background: #fff7fa;
+  border-radius: 22px;
+  padding: 35px 45px;
+  width: 500px;
+  height: 600px;
+  text-align: center;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
 
-    .card {
-      background: #fff7fa;
-      border-radius: 22px;
-      padding: 35px 45px;
-      width: 460px;
-      height: 520px;
-      text-align: center;
-      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
+.cat img {
+  width: 135px;
+  margin-bottom: 18px;
+}
 
-    .cat img {
-      width: 135px;
-      margin-bottom: 18px;
-    }
+h1 {
+  font-size: 28px;
+  color: #c2185b;
+  margin-bottom: 20px;
+}
 
-    h1 {
-      font-size: 28px;
-      color: #c2185b;
-      margin-bottom: 30px;
-    }
+.interactive {
+  flex-grow: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+}
 
-    .interactive {
-      flex-grow: 1;
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
+.buttons {
+  position: relative;
+  width: 100%;
+  height: 130px;
+}
 
-    .buttons {
-      position: relative;
-      width: 100%;
-      height: 130px;
-    }
+button {
+  position: absolute;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  font-size: 17px;
+  padding: 14px 34px;
+  transition: transform 0.1s ease;
+}
 
-    button {
-      position: absolute;
-      border-radius: 999px;
-      border: none;
-      cursor: pointer;
-      font-size: 17px;
-      padding: 14px 34px;
-    }
+#yes {
+  left: 22%;
+  background: #ff7aa2;
+  color: white;
+  box-shadow: 0 4px 10px rgba(255, 122, 162, 0.4);
+  z-index: 1;
+}
 
-    #yes {
-      left: 22%;
-      background: #ff7aa2;
-      color: white;
-      box-shadow: 0 4px 10px rgba(255, 122, 162, 0.4);
-    }
+#no {
+  right: 22%;
+  background: #ffd1dc;
+  color: #a94460;
+  width: 110px;
+  height: 48px;
+  z-index: 2;
+}
 
-    #no {
-      right: 22%;
-      background: #ffd1dc;
-      color: #a94460;
+.hint {
+  font-size: 12px;
+  color: #a66;
+  margin-top: auto;
+  padding-top: 15px;
+}
 
-      width: 110px;
-      height: 48px;
+.score {
+  margin-top: 15px;
+  font-size: 18px;
+  color: #d81b60;
+  font-weight: bold;
+  text-align: center;
+}
 
-      transform: none !important;
-      transition: none !important;
-    }
+/* 3D-looking cloud No bubbles */
+.small-no {
+  position: absolute;
+  background: linear-gradient(145deg, #a2d4f2, #73b3d8);
+  border: 2px solid #73b3d8;
+  color: #073763;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  user-select: none;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.3), inset 0 -3px 6px rgba(255,255,255,0.3);
+}
 
-    .hint {
-      font-size: 12px;
-      color: #a66;
-      margin-top: auto;
-      padding-top: 15px;
-    }
+.explode {
+  animation: explodeAnim 0.3s forwards;
+}
 
-    .yay-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
+@keyframes explodeAnim {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(2); opacity: 0; }
+}
 
-    .yay {
-      font-size: 44px;
-      color: #d81b60;
-      font-weight: bold;
-      margin-bottom: 18px;
-    }
+.floating-text {
+  position: absolute;
+  font-size: 28px;
+  font-weight: bold;
+  color: #d81b60;
+  pointer-events: none;
+  animation: floatUp 3s forwards;
+  text-align: center;
+  width: 100%;
+  left: 0;
+}
 
-    .yay-gif {
-      width: 310px; /* slightly smaller */
-      border-radius: 14px;
-    }
-  </style>
+@keyframes floatUp {
+  0% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(-150px); opacity: 0; }
+}
+
+.firework {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background: radial-gradient(circle, #ff7aa2, #ffd1dc);
+  border-radius: 50%;
+  animation: fireworkAnim 1s linear forwards;
+}
+
+@keyframes fireworkAnim {
+  0% { transform: translate(0,0) scale(1); opacity: 1; }
+  100% { transform: translate(var(--x), var(--y)) scale(0.2); opacity: 0; }
+}
+</style>
 </head>
 <body>
 
-  <div class="card">
-    <div class="cat">
-      <!-- Cartoon kitty sticker -->
-      <img
-        src="https://pngimg.com/uploads/cat/cat_PNG50533.png"
-        alt="Cute cartoon kitty"
-      />
-    </div>
-
-    <h1>Melanie, will you be my valentine?</h1>
-
-    <div class="interactive" id="interactive">
-      <div class="buttons" id="buttons">
-        <button id="yes">Yes</button>
-        <button id="no">No</button>
-      </div>
-
-      <div class="hint">
-        “No” seems a bit shy 😈
-      </div>
-    </div>
+<div class="card">
+  <div class="cat">
+    <img src="https://pngimg.com/uploads/cat/cat_PNG50533.png" alt="Cute cartoon kitty" />
   </div>
 
-  <script>
-    const noButton = document.getElementById("no");
-    const container = document.getElementById("buttons");
-    const interactive = document.getElementById("interactive");
+  <h1>Melanie, will you be my valentine?</h1>
 
-    function moveNoButton() {
-      const rect = container.getBoundingClientRect();
-      const maxX = rect.width - noButton.offsetWidth;
-      const maxY = rect.height - noButton.offsetHeight;
+  <div class="interactive" id="interactive">
+    <div class="buttons" id="buttons">
+      <button id="yes">Yes</button>
+      <button id="no">No</button>
+    </div>
+    <div class="hint">“No” seems a bit shy 😈</div>
+  </div>
 
-      noButton.style.left = Math.random() * maxX + "px";
-      noButton.style.top = Math.random() * maxY + "px";
+  <div class="score" id="score">Score: 0</div>
+</div>
+
+<script>
+const noButton = document.getElementById('no');
+const yesButton = document.getElementById('yes');
+const container = document.getElementById('buttons');
+const interactive = document.getElementById('interactive');
+const scoreDisplay = document.getElementById('score');
+
+let score = 0;
+let noClicked = false;
+let smallNos = [];
+let smallNoCount = 0;
+let failTimeout;
+
+// Rotating congratulation messages
+const congratsMessages = [
+  "Oh you are good Melanie!",
+  "Damn you are a crazy munchkin",
+  "Wtf? How are you so good",
+  "Girl marry me",
+  "The agility of yours is inhuman",
+  "Ok you should probably go back to work",
+  "Stop playing games and text me <3"
+];
+let msgIndex = 0;
+
+// --- Evasive No button ---
+function evadeCursor(event) {
+  if (noClicked) return;
+  const rect = container.getBoundingClientRect();
+  const btnRect = noButton.getBoundingClientRect();
+  const x = event.clientX - rect.left;
+  const y = event.clientY - rect.top;
+  let left = parseFloat(noButton.style.left || btnRect.left - rect.left);
+  let top = parseFloat(noButton.style.top || btnRect.top - rect.top);
+
+  const dx = x - (left + btnRect.width/2);
+  const dy = y - (top + btnRect.height/2);
+  const dist = Math.sqrt(dx*dx + dy*dy);
+
+  if(dist < 120) { 
+    left -= dx/1.5;
+    top -= dy/1.5;
+    left = Math.max(0, Math.min(left, rect.width - btnRect.width));
+    top = Math.max(0, Math.min(top, rect.height - btnRect.height));
+    noButton.style.left = left + 'px';
+    noButton.style.top = top + 'px';
+  }
+}
+noButton.addEventListener('mousemove', evadeCursor);
+
+// --- YAY page ---
+function showYay() {
+  interactive.innerHTML = `
+    <div class="yay-container">
+      <div class="yay">YAY! 💖</div>
+      <img class="yay-gif" src="https://media1.tenor.com/m/cxZwlFQevogAAAAd/whoa-woah.gif" alt="Celebration gif" />
+    </div>
+  `;
+}
+yesButton.addEventListener('click', showYay);
+
+// --- CREATE SMALL NOS ---
+function createSmallNos(){
+  noClicked = true;
+  smallNos = [];
+  smallNoCount = 7;
+
+  for(let i=0;i<7;i++){
+    const small = document.createElement('div');
+    small.className='small-no';
+    small.textContent='No';
+
+    // Random screen-wide positions
+    small.style.left = Math.random()*(window.innerWidth-60)+'px';
+    small.style.top = Math.random()*(window.innerHeight-60)+'px';
+
+    // Random floating velocity
+    small.vx = (Math.random()*2-1)*0.5;
+    small.vy = (Math.random()*2-1)*0.5;
+
+    document.body.appendChild(small);
+    smallNos.push(small);
+
+    small.addEventListener('click', ()=>{
+      small.classList.add('explode');
+      score+=10;
+      scoreDisplay.textContent='Score: '+score;
+      smallNoCount--;
+      if(smallNoCount===0){
+        clearTimeout(failTimeout); // cancel fail
+        triggerFireworks();
+      }
+      setTimeout(()=>small.remove(),300);
+    });
+  }
+
+  animateSmallNos();
+
+  // Remove remaining small Nos after 5.2 sec (increased by 0.2s)
+  failTimeout = setTimeout(()=>{
+    if(smallNoCount>0){
+      score = 0;
+      scoreDisplay.textContent='Score: 0';
+      showFloatingText("Booo 💩");
     }
+    smallNos.forEach(s=>s.remove());
+    smallNos=[];
+    noClicked=false;
+  },5200);
+}
 
-    noButton.addEventListener("mouseenter", moveNoButton);
-    noButton.addEventListener("mousemove", moveNoButton);
+// --- FLOATING ANIMATION ---
+let animationFrame;
+function animateSmallNos(){
+  function step(){
+    smallNos.forEach(s=>{
+      let left=parseFloat(s.style.left);
+      let top=parseFloat(s.style.top);
+      left+=s.vx;
+      top+=s.vy;
 
-    setTimeout(() => {
-      interactive.innerHTML = `
-        <div class="yay-container">
-          <div class="yay">YAY! 💖</div>
-          <img
-            class="yay-gif"
-            src="https://media1.tenor.com/m/cxZwlFQevogAAAAd/whoa-woah.gif"
-            alt="Celebration gif"
-          />
-        </div>
-      `;
-    }, 8000);
-  </script>
+      // Bounce off window edges
+      if(left<0 || left>window.innerWidth-60) s.vx*=-1;
+      if(top<0 || top>window.innerHeight-60) s.vy*=-1;
+
+      left=Math.max(0,Math.min(left,window.innerWidth-60));
+      top=Math.max(0,Math.min(top,window.innerHeight-60));
+      s.style.left=left+'px';
+      s.style.top=top+'px';
+    });
+    if(smallNos.length>0) animationFrame=requestAnimationFrame(step);
+  }
+  animationFrame=requestAnimationFrame(step);
+}
+
+// --- FIREWORKS + FLOATING TEXT ---
+function triggerFireworks(){
+  const fireworksCount=60;
+  for(let i=0;i<fireworksCount;i++){
+    const fw=document.createElement('div');
+    fw.className='firework';
+    const x=(Math.random()*1200-600)+'px';
+    const y=(Math.random()*-800)+'px';
+    fw.style.setProperty('--x',x);
+    fw.style.setProperty('--y',y);
+    fw.style.left='50%';
+    fw.style.top='50%';
+    interactive.appendChild(fw);
+    setTimeout(()=>fw.remove(),1500);
+  }
+
+  showFloatingText(congratsMessages[msgIndex]);
+  msgIndex=(msgIndex+1)%congratsMessages.length;
+}
+
+// --- SHOW FLOATING TEXT ---
+function showFloatingText(message){
+  const text=document.createElement('div');
+  text.className='floating-text';
+  text.textContent=message;
+  interactive.appendChild(text);
+  setTimeout(()=>text.remove(),4000);
+}
+
+// Main No click
+noButton.addEventListener('click', createSmallNos);
+
+// Optional: automatic YAY after 10 minutes
+setTimeout(showYay,600000);
+</script>
 
 </body>
 </html>
